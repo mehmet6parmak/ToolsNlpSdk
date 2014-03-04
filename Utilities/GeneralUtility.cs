@@ -4,11 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ITU.Nlp.Tools.Model;
 using PCLStorage;
-<<<<<<< HEAD
-  
-=======
- 
->>>>>>> 1d03112aca671fd46df7cd802002797ac0512a73
+
 namespace ITU.Nlp.Tools.Utilities
 {
     public static class GeneralUtility
