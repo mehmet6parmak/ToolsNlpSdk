@@ -9,7 +9,7 @@ namespace ITU.Nlp.Tools.Utilities
 {
     public static class GeneralUtility
     {
-        public async static Task<List<Sentence>> LoadFromFile(string fileName, Encoding encoding = null)
+        public static async Task<List<Sentence>> LoadFromFile(string fileName, Encoding encoding = null)
         {
             IFile file = await FileSystem.Current.GetFileFromPathAsync(fileName);
             Stream stream = await file.OpenAsync(FileAccess.Read);

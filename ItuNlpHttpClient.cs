@@ -22,37 +22,37 @@ namespace ITU.Nlp.Tools
         private const string Disambiguator = "disambiguator";
         private const string PipeLine = "pipeline";
 
-        public static List<NlpTool> Tools = new List<NlpTool>
-            {
-                new NlpTool { Name = "NamedEntityRecognizer", Key = "ner"},
-                new NlpTool { Name = "Normalizer", Key = "normalize"},
-                new NlpTool { Name = "TurkishCheck", Key = "isturkish"},
-                new NlpTool { Name = "Tokenizer", Key = "tokenizer"},
-                new NlpTool { Name = "DeAsciifier", Key = "deasciifier"},
-                new NlpTool { Name = "MorphAnalyzer", Key = "morphanalyzer"},
-                new NlpTool { Name = "Vocalizer", Key = "vocalizer"},
-                new NlpTool { Name = "DependencyParser", Key = "depparser"},
-                new NlpTool { Name = "SpellChecker", Key = "spellcheck"},
-                new NlpTool { Name = "Disambiguator", Key = "disambiguator"},
-                new NlpTool { Name = "PipeLine", Key = "pipeline"}
-            };
-
         private const string ParameterFormat = "&token={0}&input={1}";
         private const string GeneralUrl = BaseUrl + "?tool={0}&token={1}&input={2}";
         private const string NormalizerUrl = BaseUrl + "?tool=" + Normalizer + ParameterFormat;
 
+        public static List<NlpTool> Tools = new List<NlpTool>
+            {
+                new NlpTool {Name = "NamedEntityRecognizer", Key = "ner"},
+                new NlpTool {Name = "Normalizer", Key = "normalize"},
+                new NlpTool {Name = "TurkishCheck", Key = "isturkish"},
+                new NlpTool {Name = "Tokenizer", Key = "tokenizer"},
+                new NlpTool {Name = "DeAsciifier", Key = "deasciifier"},
+                new NlpTool {Name = "MorphAnalyzer", Key = "morphanalyzer"},
+                new NlpTool {Name = "Vocalizer", Key = "vocalizer"},
+                new NlpTool {Name = "DependencyParser", Key = "depparser"},
+                new NlpTool {Name = "SpellChecker", Key = "spellcheck"},
+                new NlpTool {Name = "Disambiguator", Key = "disambiguator"},
+                new NlpTool {Name = "PipeLine", Key = "pipeline"}
+            };
 
-        public string Token { get; private set; }
 
         public ItuNlpHttpClient(string token)
         {
             Token = token;
         }
 
+        public string Token { get; private set; }
+
         public async Task<string> Normalize(string input)
         {
-            var url = string.Format(NormalizerUrl, Token, input);
-            var result = await PostAsync(url, null);
+            string url = string.Format(NormalizerUrl, Token, input);
+            HttpResponseMessage result = await PostAsync(url, null);
             return await result.Content.ReadAsStringAsync();
         }
 
@@ -71,10 +71,10 @@ namespace ITU.Nlp.Tools
             }
             else
             {
-                var tokenized = await RequestNlpTools(Tokenizer, input);
-                var tokens = tokenized.Split(StringUtils.NewLineCharacters, StringSplitOptions.RemoveEmptyEntries);
+                string tokenized = await RequestNlpTools(Tokenizer, input);
+                string[] tokens = tokenized.Split(StringUtils.NewLineCharacters, StringSplitOptions.RemoveEmptyEntries);
 
-                foreach (var token in tokens)
+                foreach (string token in tokens)
                 {
                     result += await MorphologicallyAnaylize(token) + StringUtils.NewLineWithoutCr;
                 }
@@ -90,7 +90,7 @@ namespace ITU.Nlp.Tools
             //var escapedInput = Uri.EscapeDataString(input);
             parameters.Add(new KeyValuePair<string, string>("input", input));
             HttpContent content = new FormUrlEncodedContent(parameters);
-            var result = await PostAsync(BaseUrl, content);
+            HttpResponseMessage result = await PostAsync(BaseUrl, content);
             return await result.Content.ReadAsStringAsync();
         }
 

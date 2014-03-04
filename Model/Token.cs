@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace ITU.Nlp.Tools.Model
@@ -15,7 +14,7 @@ namespace ITU.Nlp.Tools.Model
 
         internal static Token CreateFromMorphologicalAnalysis(string tokenAnalysis)
         {
-            var analysisLines = tokenAnalysis.Split('\n');
+            string[] analysisLines = tokenAnalysis.Split('\n');
             var token = new Token();
             token.RawForm = analysisLines[0];
             token.MorphologicalAnalyses = new List<MorphologicalAnalysis>();

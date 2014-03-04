@@ -4,7 +4,7 @@ namespace ITU.Nlp.Tools.Utilities
 {
     public static class StringUtils
     {
-        public static readonly string[] NewLineCharacters = new[] { "\r\n", "\n" };
+        public static readonly string[] NewLineCharacters = new[] {"\r\n", "\n"};
         public static readonly string NewLineWithoutCr = "\n";
         public static readonly string NewLineWithCr = "\r\n";
 
@@ -22,6 +22,5 @@ namespace ITU.Nlp.Tools.Utilities
             }
             return false;
         }
-
     }
 }

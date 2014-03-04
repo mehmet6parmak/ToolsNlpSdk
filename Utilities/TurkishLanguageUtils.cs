@@ -12,13 +12,13 @@ namespace ITU.Nlp.Tools.Utilities
         public static readonly CultureInfo Turkey = new CultureInfo("tr-TR");
         private static HashSet<string> _stopWords;
 
-        public async static Task<HashSet<string>> StopWordsAsync()
+        public static async Task<HashSet<string>> StopWordsAsync()
         {
             if (_stopWords == null)
             {
                 _stopWords = new HashSet<string>();
                 IFile file = await FileSystem.Current.GetFileFromPathAsync("Data/stop_words.txt");
-                var stream = await file.OpenAsync(FileAccess.Read);
+                Stream stream = await file.OpenAsync(FileAccess.Read);
                 using (var reader = new StreamReader(stream, Encoding.UTF8))
                 {
                     string line;
@@ -29,10 +29,9 @@ namespace ITU.Nlp.Tools.Utilities
             return _stopWords;
         }
 
-        public async static Task<bool> IsStopWord(string input)
+        public static async Task<bool> IsStopWord(string input)
         {
             return (await StopWordsAsync()).Contains(input);
         }
-
     }
 }

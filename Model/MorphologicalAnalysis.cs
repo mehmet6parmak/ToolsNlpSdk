@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+
 namespace ITU.Nlp.Tools.Model
 {
     [DataContract]
@@ -17,13 +18,13 @@ namespace ITU.Nlp.Tools.Model
         {
             get
             {
-                var splitResult = RawAnalysis.Split(new [] { '+', '^' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] splitResult = RawAnalysis.Split(new[] {'+', '^'}, StringSplitOptions.RemoveEmptyEntries);
                 if (splitResult.Length > 1)
                 {
-                    var postag = splitResult[1];
+                    string postag = splitResult[1];
                     switch (postag)
                     {
-                        case "noun" : 
+                        case "noun":
                             return PosTag.Noun;
                         case "adj":
                             return PosTag.Adjective;
@@ -102,6 +103,5 @@ namespace ITU.Nlp.Tools.Model
         Duplication = 4096,
         Guess = 32768,
         UnKnown = 65536,
-        
     }
 }
