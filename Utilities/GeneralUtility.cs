@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ITU.Nlp.Tools.Model;
 using PCLStorage;
-
+ 
 namespace ITU.Nlp.Tools.Utilities
 {
     public static class GeneralUtility
